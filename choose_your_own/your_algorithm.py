@@ -30,13 +30,18 @@ plt.show()
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
+from time import time
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=5, max_features=None)
 
+t0 = time()
+clf.fit(features_train, labels_train)
+print "training time:", round(time() - t0, 3), "s"
 
+labels_pred = clf.predict(features_test)
 
-
-
-
-
+from sklearn.metrics import accuracy_score
+print accuracy_score(labels_test, labels_pred)
 
 try:
     prettyPicture(clf, features_test, labels_test)
