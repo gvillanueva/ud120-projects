@@ -22,8 +22,8 @@ def min_max_value(data_dict, key_name):
     # find minimum and maximum exercised_stock_options values
     min_key = min(data_dict_no_NaN, key=lambda x:data_dict_no_NaN[x][key_name])
     max_key = max(data_dict_no_NaN, key=lambda x:data_dict_no_NaN[x][key_name])
-    print data_dict_no_NaN[min_key][key_name]
-    print data_dict_no_NaN[max_key][key_name]
+    return (data_dict_no_NaN[min_key][key_name],
+            data_dict_no_NaN[max_key][key_name])
 
 def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature 1", f2_name="feature 2", f3_name="feature 3"):
     """ some plotting code designed to help you visualize your clusters """
@@ -86,5 +86,10 @@ try:
 except NameError:
     print "no predictions object named pred found, no clusters to plot"
 
-min_max_value(data_dict, 'exercised_stock_options')
-min_max_value(data_dict, 'salary')
+min_exercised_stock, max_exercised_stock = min_max_value(data_dict, 'exercised_stock_options')
+min_salary, max_salary = min_max_value(data_dict, 'salary')
+print "MIN %.2f, MAX %.2f" % (min_exercised_stock, max_exercised_stock)
+print "MIN %.2f, MAX %.2f" % (min_salary, max_salary)
+
+print (200000.0 - min_salary) / (max_salary - min_salary)
+print (1000000.0 - min_exercised_stock) / (max_exercised_stock - min_exercised_stock)
